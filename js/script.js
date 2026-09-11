@@ -36,4 +36,26 @@ const observer = new IntersectionObserver((entries) => {
 
 reveals.forEach((element) => observer.observe(element));
 
+const portrait = document.querySelector('.hero-panel img[alt="Portrait professionnel de Gregory Dourlent"]');
+if (portrait) {
+  const frame = portrait.parentElement;
+  Object.assign(frame.style, {
+    width: '126px',
+    height: '126px',
+    aspectRatio: '1 / 1',
+    margin: '50px 0 28px',
+    borderRadius: '34px',
+    border: '0',
+    boxShadow: '0 26px 50px rgba(23,62,112,.22)',
+    transform: 'rotate(-3deg)',
+    background: '#dbe7f4'
+  });
+  Object.assign(portrait.style, {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    objectPosition: '50% 30%'
+  });
+}
+
 document.getElementById('year').textContent = new Date().getFullYear();
