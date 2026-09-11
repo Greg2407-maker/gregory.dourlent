@@ -1,3 +1,34 @@
+const mobileHeroFix = document.createElement('style');
+mobileHeroFix.textContent = `
+@media (max-width: 820px) {
+  .hero-panel {
+    min-height: auto;
+  }
+
+  .code-card {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 620px) {
+  .code-card {
+    grid-template-columns: 22px minmax(0, 1fr);
+    gap: 8px 10px;
+    padding: 14px 15px;
+    font-size: .67rem;
+  }
+
+  .code-card code {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+`;
+document.head.appendChild(mobileHeroFix);
+
 const header = document.querySelector('.site-header');
 const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.main-nav');
