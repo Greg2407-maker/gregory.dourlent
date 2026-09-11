@@ -130,44 +130,20 @@ img { max-width: 100%; display: block; }
 .projects-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 18px; }
 .project-card { position: relative; min-height: 275px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); padding: 28px; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
 .project-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-soft); }
-.project-card--featured {
-  grid-row: span 2;
-  padding: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-rows: auto auto;
-}
-.project-card--featured .project-visual--royal {
-  grid-column: 1 / -1;
-  grid-row: 1;
-}
-.project-card--featured .project-body {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  padding-right: 100px;
-}
-.project-card--featured .project-number--featured {
-  position: static !important;
-  grid-column: 2;
-  grid-row: 2;
-  align-self: start;
-  justify-self: end;
-  width: 48px;
-  height: 48px;
-  margin: 28px 28px 0 0;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: #fff;
-  box-shadow: 0 8px 20px rgba(35,69,110,.07);
-  color: var(--blue) !important;
-  font-size: .88rem !important;
+.project-card--featured { grid-row: span 2; padding: 0; }
+.project-card--featured .project-number--featured { display: none; }
+.project-card--featured .project-body { position: relative; padding-right: 94px; }
+.project-card--featured .project-body::after {
+  content: "01";
+  position: absolute;
+  right: 25px;
+  top: 21px;
+  font-family: "Manrope", sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
   line-height: 1;
-  letter-spacing: .04em;
-  z-index: 5 !important;
-  top: auto !important;
-  right: auto !important;
+  color: #eef2f6;
+  pointer-events: none;
 }
 .project-visual { height: 340px; background: radial-gradient(circle at 75% 20%, #dceafb 0, transparent 28%), linear-gradient(145deg, #edf4fb, #dce8f6); padding: 50px 50px 0; overflow: hidden; }
 .mock-window { height: 100%; border: 1px solid rgba(112, 140, 171, .25); border-radius: 18px 18px 0 0; background: #fff; box-shadow: 0 24px 50px rgba(48, 80, 116, .13); transform: rotate(-2deg); }
@@ -210,28 +186,28 @@ img { max-width: 100%; display: block; }
 .reveal-delay { transition-delay: .12s; }
 
 @keyframes royal-search-nudge {
-  0%, 68%, 100% {
+  0%, 56%, 100% {
     transform: translateY(0) scale(1);
     box-shadow: 0 6px 13px rgba(36,94,166,.18), 0 0 0 0 rgba(71,135,210,0);
   }
-  76% {
-    transform: translateY(-1px) scale(1.018);
-    box-shadow: 0 8px 18px rgba(36,94,166,.26), 0 0 0 0 rgba(71,135,210,.24);
+  68% {
+    transform: translateY(-2px) scale(1.055);
+    box-shadow: 0 10px 22px rgba(36,94,166,.32), 0 0 0 3px rgba(71,135,210,.18);
   }
-  88% {
-    transform: translateY(0) scale(1.006);
-    box-shadow: 0 7px 15px rgba(36,94,166,.22), 0 0 0 8px rgba(71,135,210,0);
+  82% {
+    transform: translateY(0) scale(1.018);
+    box-shadow: 0 8px 18px rgba(36,94,166,.25), 0 0 0 11px rgba(71,135,210,0);
   }
 }
 .royal-demo__search:not(:disabled) {
-  animation: royal-search-nudge 3.4s ease-in-out infinite;
+  animation: royal-search-nudge 2.7s ease-in-out infinite;
   will-change: transform, box-shadow;
 }
 .royal-demo__search:not(:disabled):hover,
 .royal-demo__search:not(:disabled):focus-visible {
   animation-play-state: paused;
-  transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 9px 19px rgba(36,94,166,.28), 0 0 0 4px rgba(71,135,210,.10);
+  transform: translateY(-2px) scale(1.07);
+  box-shadow: 0 11px 24px rgba(36,94,166,.34), 0 0 0 5px rgba(71,135,210,.12);
 }
 .royal-demo__search:disabled { animation: none; }
 
@@ -284,13 +260,7 @@ img { max-width: 100%; display: block; }
   .pill { align-self: flex-start; }
   .project-visual { height: 250px; padding: 35px 24px 0; }
   .project-card--featured .project-body { padding-right: 82px; }
-  .project-card--featured .project-number--featured {
-    width: 42px;
-    height: 42px;
-    margin: 27px 20px 0 0;
-    border-radius: 11px;
-    font-size: .8rem !important;
-  }
+  .project-card--featured .project-body::after { right: 20px; top: 27px; }
   .contact-card h2 { font-size: 2.3rem; }
   .btn-white { min-width: 0; width: 100%; overflow-wrap: anywhere; }
   .contact-actions { width: 100%; }
