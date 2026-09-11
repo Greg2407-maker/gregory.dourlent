@@ -5,21 +5,21 @@ const navLinks = document.querySelectorAll('.main-nav a');
 const reveals = document.querySelectorAll('.reveal');
 
 function updateHeader() {
-  header.classList.toggle('scrolled', window.scrollY > 16);
+  header?.classList.toggle('scrolled', window.scrollY > 16);
 }
 
 updateHeader();
 window.addEventListener('scroll', updateHeader, { passive: true });
 
 menuToggle?.addEventListener('click', () => {
-  const isOpen = nav.classList.toggle('open');
-  menuToggle.setAttribute('aria-expanded', String(isOpen));
-  document.body.classList.toggle('menu-open', isOpen);
+  const isOpen = nav?.classList.toggle('open');
+  menuToggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
+  document.body.classList.toggle('menu-open', Boolean(isOpen));
 });
 
 navLinks.forEach((link) => {
   link.addEventListener('click', () => {
-    nav.classList.remove('open');
+    nav?.classList.remove('open');
     menuToggle?.setAttribute('aria-expanded', 'false');
     document.body.classList.remove('menu-open');
   });
@@ -47,7 +47,6 @@ function applyHeroResponsiveFix() {
     if (isMobile) {
       heroPanel.style.setProperty('min-height', 'auto', 'important');
       heroPanel.style.setProperty('padding-bottom', '20px', 'important');
-
       codeCard.style.setProperty('position', 'static', 'important');
       codeCard.style.setProperty('inset', 'auto', 'important');
       codeCard.style.setProperty('left', 'auto', 'important');
@@ -62,7 +61,6 @@ function applyHeroResponsiveFix() {
     } else {
       heroPanel.style.removeProperty('min-height');
       heroPanel.style.removeProperty('padding-bottom');
-
       ['position','inset','left','right','top','bottom','width','margin','box-sizing','grid-template-columns','gap'].forEach((property) => {
         codeCard.style.removeProperty(property);
       });
@@ -72,7 +70,6 @@ function applyHeroResponsiveFix() {
 
 if (portrait) {
   const frame = portrait.parentElement;
-
   Object.assign(frame.style, {
     width: '126px',
     height: '126px',
@@ -85,7 +82,6 @@ if (portrait) {
     background: '#dbe7f4',
     overflow: 'hidden'
   });
-
   Object.assign(portrait.style, {
     width: '100%',
     height: '100%',
@@ -111,7 +107,6 @@ scrollTopLink?.addEventListener('click', (event) => {
 
 // -----------------------------------------------------------------------------
 // Royal Track — démonstration interactive locale
-// Aucun backend, aucune API et aucune donnée réelle ne sont utilisés ici.
 // -----------------------------------------------------------------------------
 const royalPreview = document.querySelector('.royal-preview');
 let currentLang = 'fr';
@@ -120,8 +115,8 @@ let refreshRoyalLanguage = () => {};
 if (royalPreview) {
   const royalDemoStyle = document.createElement('style');
   royalDemoStyle.textContent = `
-    .royal-preview.royal-demo { min-height: 302px; background: rgba(255,255,255,.98); }
-    .royal-demo * { box-sizing: border-box; }
+    .royal-preview.royal-demo { min-height:302px; background:rgba(255,255,255,.98); }
+    .royal-demo * { box-sizing:border-box; }
     .royal-demo__header { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:13px 16px 11px; border-bottom:1px solid #e8eef5; background:linear-gradient(180deg,#fff,#fbfdff); }
     .royal-demo__brand strong { display:block; color:#173e70; font:800 .84rem/1 "Manrope",sans-serif; letter-spacing:.08em; }
     .royal-demo__brand small { color:#7b899a; font-size:.58rem; }
@@ -227,7 +222,11 @@ if (royalPreview) {
   let royalState = 'empty';
 
   const demoProfile = {
-    tag: '#ROYAL01', name: 'DataKnight', trophies: '8 124', level: '59', clan: 'ETL Legends',
+    tag: '#ROYAL01',
+    name: 'DataKnight',
+    trophies: '8 124',
+    level: '59',
+    clan: 'ETL Legends',
     cards: [
       { name: 'Knight', level: 14, progress: 88 },
       { name: 'Fireball', level: 13, progress: 64 },
@@ -261,16 +260,19 @@ if (royalPreview) {
     const c = royalCopy[currentLang];
     stage.innerHTML = `<div class="royal-demo__empty"><div><div class="royal-demo__empty-icon">#</div><strong>${c.emptyTitle}</strong><span>${c.emptyText}</span></div></div>`;
   }
+
   function renderRoyalLoading() {
     royalState = 'loading';
     const c = royalCopy[currentLang];
     stage.innerHTML = `<div class="royal-demo__loading"><div><div class="royal-demo__spinner"></div><span>${c.loading}</span></div></div>`;
   }
+
   function renderRoyalError() {
     royalState = 'error';
     const c = royalCopy[currentLang];
     stage.innerHTML = `<div class="royal-demo__error"><div><strong>${c.errorTitle}</strong><span>${c.errorText}</span></div></div>`;
   }
+
   function renderRoyalResult(profile) {
     royalState = 'result';
     const c = royalCopy[currentLang];
@@ -291,7 +293,12 @@ if (royalPreview) {
         </div>
         <div class="royal-demo__footer"><div class="royal-demo__features"><span>Filters</span><span>Meta Decks</span><span>Progression</span></div><button class="royal-demo__reset" type="button" data-royal-reset>${c.reset}</button></div>
       </div>`;
-    stage.querySelector('[data-royal-reset]')?.addEventListener('click', () => { input.value = '#ROYAL01'; renderRoyalEmpty(); input.focus({ preventScroll:true }); });
+
+    stage.querySelector('[data-royal-reset]')?.addEventListener('click', () => {
+      input.value = '#ROYAL01';
+      renderRoyalEmpty();
+      input.focus({ preventScroll: true });
+    });
   }
 
   refreshRoyalLanguage = () => {
@@ -311,7 +318,10 @@ if (royalPreview) {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     const normalizedTag = input.value.trim().replace(/\s+/g, '').toUpperCase();
-    if (normalizedTag !== demoProfile.tag) { renderRoyalError(); return; }
+    if (normalizedTag !== demoProfile.tag) {
+      renderRoyalError();
+      return;
+    }
     searchButton.disabled = true;
     searchButton.textContent = royalCopy[currentLang].searching;
     renderRoyalLoading();
@@ -353,6 +363,7 @@ function html(selector, value) {
   const el = document.querySelector(selector);
   if (el) el.innerHTML = value;
 }
+
 function text(selector, value) {
   const el = document.querySelector(selector);
   if (el) el.textContent = value;
@@ -364,9 +375,22 @@ const copy = {
     heroTitle:'Transformer la donnée en <span>solutions utiles, fiables et lisibles.</span>',
     heroLead:"Data Engineer / BI Developer avec 5 ans d'expérience en data, business intelligence et automatisation. J'interviens de la collecte et de la transformation des données jusqu'à leur restitution dans des outils décisionnels.",
     heroButtons:['Voir mon parcours <span aria-hidden="true">↘</span>','Voir mon CV <span aria-hidden="true">↗</span>'],
-    meta:['d\'expérience','IT · Cyber & Data','Anglais'],
-    panel:'Profil technique', status:'Disponible pour échanger', stack:'STACK PRINCIPALE', stackText:'Data pipelines, ETL, dashboards, automatisation, APIs et supervision.',
-    expHeading:'De la collecte des données au pilotage métier.', expIntro:'Des missions orientées data, BI et automatisation, avec une forte interaction avec les utilisateurs et les équipes métier.',
+    meta:["d'expérience",'IT · Cyber & Data','Anglais'],
+    panel:'Profil technique',
+    status:'Disponible pour échanger',
+    stack:'STACK PRINCIPALE',
+    stackText:'Data pipelines, ETL, dashboards, automatisation, APIs et supervision.',
+    expertiseKicker:'Expertise',
+    expertiseHeading:"Un profil data à l'interface du métier et de l'IT.",
+    expertiseIntro:'De la donnée brute à la restitution métier : conception de flux, automatisation, modélisation et visualisation dans des environnements IT complexes.',
+    expertiseCards:[
+      ['Data Engineering','Conception de flux de données, ETL, ingestion, transformation et alimentation de bases pour des usages métiers et décisionnels.'],
+      ['BI & Data Visualisation',"Conception de dashboards Power BI, modélisation de données et restitution d'indicateurs pour le pilotage métier."],
+      ['Automation',"Automatisation de traitements avec Python et PowerShell, intégration d'API et industrialisation de tâches récurrentes."],
+      ['Systèmes & Sécurité','Une expérience en infrastructure, administration et cybersécurité qui complète mon profil data.']
+    ],
+    expHeading:'De la collecte des données au pilotage métier.',
+    expIntro:'Des missions orientées data, BI et automatisation, avec une forte interaction avec les utilisateurs et les équipes métier.',
     c1:"Responsable de bout en bout de la partie data d'un outil de supervision des sauvegardes d'un environnement assurance. Conception de flux ETL avec SSIS pour collecter des données issues de bases et de fichiers CSV, centralisation dans une base locale puis restitution via des dashboards Power BI pour suivre quotidiennement l'état des sauvegardes des serveurs.",
     c2:"Le projet évolue en interaction directe avec les utilisateurs internes : définition du besoin, adaptation des indicateurs, présentations en COPIL et amélioration continue selon une approche agile.",
     perencoCompany:'PERENCO · Londres',
@@ -375,14 +399,21 @@ const copy = {
     london:"Une expérience professionnelle vécue à Londres, qui m'a permis de travailler quotidiennement en anglais au sein d'équipes internationales.",
     nge:"Conception de dashboards Power BI pour le suivi des projets de cybersécurité : MFA, SSO, EDR, MDM et gouvernance des accès. Les outils de supervision permettaient d'analyser un environnement pouvant représenter jusqu'à environ 15 000 comptes afin d'identifier les anomalies et de suivre l'avancement des dispositifs de sécurité.",
     luma:"Administration de systèmes et réseaux, déploiement d'infrastructures et mise en place de solutions de supervision. Environnement VMware et Windows Server, déploiement de Zabbix et Grafana, administration réseau Cisco et projets Raspberry Pi pour la supervision d'infrastructures.",
-    projectsTitle:'Des projets personnels pour continuer à expérimenter.', projectsIntro:'Développement, data, cybersécurité et mobile : des sujets explorés en dehors des missions professionnelles.',
+    projectsTitle:'Des projets personnels pour continuer à expérimenter.',
+    projectsIntro:'Développement, data, cybersécurité et mobile : des sujets explorés en dehors des missions professionnelles.',
     clash:"Application React connectée à l'API Clash Royale permettant de rechercher un joueur par tag, suivre la progression de ses cartes, estimer les ressources nécessaires aux améliorations et explorer les meta decks. Le backend Express interroge l'API du jeu et l'application a été déployée sur Ubuntu / DigitalOcean.",
     pentest:'Apprentissage autonome de la cybersécurité offensive au travers de challenges Root Me et des outils Kali Linux.',
     awareness:'Présentation, supports et activités de sensibilisation aux métiers et enjeux de la cybersécurité auprès de lycéens.',
-    mobileLabel:'MOBILE · PROJET EN COURS', mobileTitle:'Application mobile de débat — Flutter', mobileText:"Développement d'une application mobile permettant de débattre en ligne autour de sujets politiques. Le projet est actuellement en cours de développement.",
+    mobileLabel:'MOBILE · PROJET EN COURS',
+    mobileTitle:'Application mobile de débat — Flutter',
+    mobileText:"Développement d'une application mobile permettant de débattre en ligne autour de sujets politiques. Le projet est actuellement en cours de développement.",
     aboutTitle:'Curiosité technique, autonomie et rigueur.',
     about:"Mon parcours m'a amené des systèmes et de la cybersécurité vers la data, la business intelligence et l'automatisation.<br /><br />J'apprécie particulièrement les projets où il faut comprendre un besoin métier, structurer les données, automatiser leur traitement puis construire une restitution claire et réellement utile aux utilisateurs.<br /><br />Mon expérience à Londres m'a également permis d'évoluer au quotidien dans un environnement professionnel anglophone et international.<br /><br />Curieux et autonome, je continue également à développer des projets personnels afin d'explorer de nouvelles technologies et de conserver une approche pratique du développement.",
-    contactTitle:'Un sujet data, BI ou automatisation ?', contactText:"Disponible pour échanger autour d'un CDI, d'une mission, d'un projet freelance ou simplement d'une opportunité intéressante.", cv:'Consulter le CV <span>↗</span>', top:'Retour en haut ↑', current:'Actuel'
+    contactTitle:'Un sujet data, BI ou automatisation ?',
+    contactText:"Disponible pour échanger autour d'un CDI, d'une mission, d'un projet freelance ou simplement d'une opportunité intéressante.",
+    cv:'Consulter le CV <span>↗</span>',
+    top:'Retour en haut ↑',
+    current:'Actuel'
   },
   en: {
     nav:['Expertise','Experience','Projects','About','Contact'],
@@ -390,8 +421,21 @@ const copy = {
     heroLead:'Data Engineer / BI Developer with 5 years of experience across data, business intelligence and automation. I work from data collection and transformation through to delivery in decision-support tools.',
     heroButtons:['View my experience <span aria-hidden="true">↘</span>','View my resume <span aria-hidden="true">↗</span>'],
     meta:['of experience','IT · Cyber & Data','English'],
-    panel:'Technical profile', status:'Open to opportunities', stack:'CORE STACK', stackText:'Data pipelines, ETL, dashboards, automation, APIs and monitoring.',
-    expHeading:'From data collection to business decision-making.', expIntro:'Data, BI and automation-focused roles with strong interaction with users and business teams.',
+    panel:'Technical profile',
+    status:'Open to opportunities',
+    stack:'CORE STACK',
+    stackText:'Data pipelines, ETL, dashboards, automation, APIs and monitoring.',
+    expertiseKicker:'Expertise',
+    expertiseHeading:'A data profile at the intersection of business and IT.',
+    expertiseIntro:'From raw data to business-ready insights: data pipelines, automation, modelling and visualisation across complex IT environments.',
+    expertiseCards:[
+      ['Data Engineering','Design of data pipelines, ETL processes, ingestion, transformation and database loading for business and decision-support use cases.'],
+      ['BI & Data Visualization','Design of Power BI dashboards, data modelling and KPI delivery to support business decision-making.'],
+      ['Automation','Automation of processing and workflows with Python and PowerShell, API integration and industrialisation of recurring tasks.'],
+      ['Systems & Security','Hands-on experience in infrastructure, systems administration and cybersecurity that complements my data profile.']
+    ],
+    expHeading:'From data collection to business decision-making.',
+    expIntro:'Data, BI and automation-focused roles with strong interaction with users and business teams.',
     c1:'End-to-end ownership of the data side of a backup monitoring solution for an insurance environment. Designed SSIS ETL flows to collect data from databases and CSV files, centralised it in a local database and delivered Power BI dashboards to monitor server backup status on a daily basis.',
     c2:'The product evolves through direct collaboration with internal users: requirements gathering, KPI refinement, steering committee presentations and continuous improvement using an agile approach.',
     perencoCompany:'PERENCO · London',
@@ -400,14 +444,21 @@ const copy = {
     london:'A professional experience lived in London, where I worked daily in English within international teams.',
     nge:'Designed Power BI dashboards to monitor cybersecurity programmes including MFA, SSO, EDR, MDM and access governance. The monitoring tools covered an environment of up to around 15,000 user accounts, helping identify anomalies and track security programme progress.',
     luma:'Systems and network administration, infrastructure deployment and monitoring solutions. Worked with VMware and Windows Server, deployed Zabbix and Grafana, administered Cisco networking and delivered Raspberry Pi monitoring projects.',
-    projectsTitle:'Personal projects to keep experimenting.', projectsIntro:'Development, data, cybersecurity and mobile: topics explored outside professional assignments.',
+    projectsTitle:'Personal projects to keep experimenting.',
+    projectsIntro:'Development, data, cybersecurity and mobile: topics explored outside professional assignments.',
     clash:'React application connected to the Clash Royale API, allowing users to search a player by tag, track card progression, estimate upgrade resources and explore meta decks. An Express backend queries the game API and the application was deployed on Ubuntu / DigitalOcean.',
     pentest:'Self-directed learning in offensive cybersecurity through Root Me challenges and Kali Linux tools.',
     awareness:'Presentations, materials and awareness activities introducing high-school students to cybersecurity careers and challenges.',
-    mobileLabel:'MOBILE · WORK IN PROGRESS', mobileTitle:'Debate mobile app — Flutter', mobileText:'Development of a mobile application designed for online debate around political topics. The project is currently in progress.',
+    mobileLabel:'MOBILE · WORK IN PROGRESS',
+    mobileTitle:'Debate mobile app — Flutter',
+    mobileText:'Development of a mobile application designed for online debate around political topics. The project is currently in progress.',
     aboutTitle:'Technical curiosity, autonomy and rigour.',
     about:'My career path took me from systems and cybersecurity into data, business intelligence and automation.<br /><br />I particularly enjoy projects where I need to understand a business need, structure the data, automate its processing and build a clear output that is genuinely useful to users.<br /><br />My experience in London also gave me the opportunity to work every day in an English-speaking, international professional environment.<br /><br />Curious and autonomous, I also keep building personal projects to explore new technologies and maintain a hands-on development approach.',
-    contactTitle:'A data, BI or automation project?', contactText:'Open to discussing permanent roles, assignments, freelance projects or simply interesting opportunities.', cv:'View resume <span>↗</span>', top:'Back to top ↑', current:'Current'
+    contactTitle:'A data, BI or automation project?',
+    contactText:'Open to discussing permanent roles, assignments, freelance projects or simply interesting opportunities.',
+    cv:'View resume <span>↗</span>',
+    top:'Back to top ↑',
+    current:'Current'
   }
 };
 
@@ -415,64 +466,107 @@ function applyLanguage(lang) {
   currentLang = lang === 'en' ? 'en' : 'fr';
   const c = copy[currentLang];
   document.documentElement.lang = currentLang;
-  document.title = currentLang === 'fr' ? 'Gregory Dourlent — Data Engineer / BI Developer' : 'Gregory Dourlent — Data Engineer / BI Developer';
 
   const navAnchors = document.querySelectorAll('.main-nav > a');
   c.nav.forEach((label, i) => { if (navAnchors[i]) navAnchors[i].textContent = label; });
+
   html('.hero h1', c.heroTitle);
   text('.hero-lead', c.heroLead);
   const heroBtns = document.querySelectorAll('.hero-actions .btn');
   if (heroBtns[0]) heroBtns[0].innerHTML = c.heroButtons[0];
   if (heroBtns[1]) heroBtns[1].innerHTML = c.heroButtons[1];
   const meta = document.querySelectorAll('.hero-meta span');
-  c.meta.forEach((v,i)=>{ if(meta[i]) meta[i].textContent=v; });
+  c.meta.forEach((value, i) => { if (meta[i]) meta[i].textContent = value; });
   text('.panel-topline > span:first-child', c.panel);
   const status = document.querySelector('.status');
   if (status) status.innerHTML = '<i></i> ' + c.status;
   text('.hero-card-copy .mini-label', c.stack);
   text('.hero-card-copy p:last-child', c.stackText);
 
-  html('#experience .section-heading h2', c.expHeading);
+  // Expertise
+  text('#expertise .kicker', c.expertiseKicker);
+  text('#expertise .section-heading h2', c.expertiseHeading);
+  text('#expertise .section-heading > p', c.expertiseIntro);
+  const expertiseCards = document.querySelectorAll('#expertise .expertise-card');
+  c.expertiseCards.forEach((cardCopy, index) => {
+    const card = expertiseCards[index];
+    if (!card) return;
+    const title = card.querySelector('h3');
+    const paragraph = card.querySelector('p');
+    if (title) title.textContent = cardCopy[0];
+    if (paragraph) paragraph.textContent = cardCopy[1];
+  });
+
+  text('#experience .section-heading h2', c.expHeading);
   text('#experience .section-heading > p', c.expIntro);
   const experiences = document.querySelectorAll('#experience .timeline-item');
   if (experiences[0]) {
     const ps = experiences[0].querySelectorAll('.timeline-content > p');
     if (ps[0]) ps[0].textContent = c.c1;
     if (ps[1]) ps[1].textContent = c.c2;
-    const pill = experiences[0].querySelector('.pill'); if (pill) pill.textContent = c.current;
+    const pill = experiences[0].querySelector('.pill');
+    if (pill) pill.textContent = c.current;
   }
   if (experiences[1]) {
-    const company = experiences[1].querySelector('.company'); if (company) company.textContent = c.perencoCompany;
+    const company = experiences[1].querySelector('.company');
+    if (company) company.textContent = c.perencoCompany;
     const ps = experiences[1].querySelectorAll('.timeline-content > p');
     if (ps[0]) ps[0].textContent = c.p1;
     if (ps[1]) ps[1].textContent = c.p2;
     let note = experiences[1].querySelector('.international-note');
-    if (!note) { note = document.createElement('p'); note.className='international-note'; experiences[1].querySelector('.timeline-content')?.insertBefore(note, experiences[1].querySelector('.tags')); }
+    if (!note) {
+      note = document.createElement('p');
+      note.className = 'international-note';
+      experiences[1].querySelector('.timeline-content')?.insertBefore(note, experiences[1].querySelector('.tags'));
+    }
     note.textContent = c.london;
   }
-  if (experiences[2]) { const p=experiences[2].querySelector('.timeline-content > p'); if(p) p.textContent=c.nge; }
-  if (experiences[3]) { const p=experiences[3].querySelector('.timeline-content > p'); if(p) p.textContent=c.luma; }
-
-  html('#projects .section-heading h2', c.projectsTitle);
-  text('#projects .section-heading > p', c.projectsIntro);
-  const projectCards = document.querySelectorAll('#projects .project-card');
-  if (projectCards[0]) { const p=projectCards[0].querySelector('.project-body p:not(.mini-label)'); if(p) p.textContent=c.clash; }
-  if (projectCards[1]) { const p=projectCards[1].querySelector('p:not(.mini-label)'); if(p) p.textContent=c.pentest; }
-  if (projectCards[2]) { const p=projectCards[2].querySelector('p:not(.mini-label)'); if(p) p.textContent=c.awareness; }
-  if (projectCards[3]) {
-    text('#projects .project-card:nth-child(4) .mini-label', c.mobileLabel);
-    text('#projects .project-card:nth-child(4) h3', c.mobileTitle);
-    const p=projectCards[3].querySelector('p:not(.mini-label)'); if(p) p.textContent=c.mobileText;
+  if (experiences[2]) {
+    const p = experiences[2].querySelector('.timeline-content > p');
+    if (p) p.textContent = c.nge;
+  }
+  if (experiences[3]) {
+    const p = experiences[3].querySelector('.timeline-content > p');
+    if (p) p.textContent = c.luma;
   }
 
-  html('#about .about-intro h2', c.aboutTitle);
-  html('#about .about-copy > p', c.about);
-  html('#contact .contact-card h2', c.contactTitle);
-  text('#contact .contact-card > div:first-child > p:last-child', c.contactText);
-  const cvLink = document.querySelector('#contact .contact-text-link'); if (cvLink) cvLink.innerHTML = c.cv;
-  const top = document.querySelector('[data-scroll-top]'); if (top) top.textContent = c.top;
+  text('#projects .section-heading h2', c.projectsTitle);
+  text('#projects .section-heading > p', c.projectsIntro);
+  const projectCards = document.querySelectorAll('#projects .project-card');
+  if (projectCards[0]) {
+    const p = projectCards[0].querySelector('.project-body p:not(.mini-label)');
+    if (p) p.textContent = c.clash;
+  }
+  if (projectCards[1]) {
+    const p = projectCards[1].querySelector('p:not(.mini-label)');
+    if (p) p.textContent = c.pentest;
+  }
+  if (projectCards[2]) {
+    const p = projectCards[2].querySelector('p:not(.mini-label)');
+    if (p) p.textContent = c.awareness;
+  }
+  if (projectCards[3]) {
+    const label = projectCards[3].querySelector('.mini-label');
+    const title = projectCards[3].querySelector('h3');
+    const p = projectCards[3].querySelector('p:not(.mini-label)');
+    if (label) label.textContent = c.mobileLabel;
+    if (title) title.textContent = c.mobileTitle;
+    if (p) p.textContent = c.mobileText;
+  }
 
-  document.querySelectorAll('.language-switch button').forEach((button) => button.classList.toggle('active', button.dataset.lang === currentLang));
+  text('#about .about-intro h2', c.aboutTitle);
+  html('#about .about-copy > p', c.about);
+  text('#contact .contact-card h2', c.contactTitle);
+  text('#contact .contact-card > div:first-child > p:last-child', c.contactText);
+  const cvLink = document.querySelector('#contact .contact-text-link');
+  if (cvLink) cvLink.innerHTML = c.cv;
+  const top = document.querySelector('[data-scroll-top]');
+  if (top) top.textContent = c.top;
+
+  document.querySelectorAll('.language-switch button').forEach((button) => {
+    button.classList.toggle('active', button.dataset.lang === currentLang);
+  });
+
   refreshRoyalLanguage();
   try { localStorage.setItem('portfolio-lang', currentLang); } catch (_) {}
 }
@@ -486,6 +580,7 @@ try {
   const saved = localStorage.getItem('portfolio-lang');
   if (saved === 'fr' || saved === 'en') initialLang = saved;
 } catch (_) {}
+
 applyLanguage(initialLang);
 
 document.getElementById('year').textContent = new Date().getFullYear();
