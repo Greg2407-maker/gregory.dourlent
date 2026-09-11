@@ -10,6 +10,264 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .project-card--featured .project-number--featured {
+      z-index: 8;
+      top: 18px;
+      right: 24px;
+      color: rgba(23, 62, 112, .34);
+    }
+    .project-visual--royal {
+      position: relative;
+      height: 360px;
+      padding: 34px 34px 0;
+      display: flex;
+      align-items: flex-end;
+      background:
+        radial-gradient(circle at 82% 12%, rgba(94, 150, 216, .25), transparent 28%),
+        linear-gradient(145deg, #edf4fb, #dce8f6);
+    }
+    .royal-preview {
+      width: 100%;
+      min-height: 302px;
+      overflow: hidden;
+      border: 1px solid rgba(112, 140, 171, .28);
+      border-radius: 18px 18px 0 0;
+      background: rgba(255,255,255,.97);
+      box-shadow: 0 24px 50px rgba(48, 80, 116, .14);
+      transform: rotate(-1deg);
+      transform-origin: bottom center;
+    }
+    .royal-preview__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 15px 18px 12px;
+      border-bottom: 1px solid #e8eef5;
+    }
+    .royal-preview__brand {
+      display: block;
+      color: #173e70;
+      font: 800 .88rem/1 "Manrope", sans-serif;
+      letter-spacing: .09em;
+    }
+    .royal-preview__top small {
+      color: #7b899a;
+      font-size: .63rem;
+    }
+    .royal-preview__tech {
+      flex: 0 0 auto;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: #eaf2fb;
+      color: #245ea6;
+      font-size: .59rem;
+      font-weight: 800;
+    }
+    .royal-preview__search {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 7px;
+      padding: 11px 18px;
+    }
+    .royal-preview__input,
+    .royal-preview__button {
+      min-height: 28px;
+      display: flex;
+      align-items: center;
+      border-radius: 7px;
+      font-size: .61rem;
+      font-weight: 700;
+    }
+    .royal-preview__input {
+      padding: 0 10px;
+      color: #8996a6;
+      background: #f7f9fc;
+      border: 1px solid #dfe7f0;
+    }
+    .royal-preview__button {
+      padding: 0 11px;
+      color: white;
+      background: #245ea6;
+    }
+    .royal-preview__body {
+      display: grid;
+      grid-template-columns: 1fr 125px;
+      gap: 12px;
+      padding: 0 18px 12px;
+    }
+    .royal-preview__player {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      padding: 9px 11px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #f8fbff, #edf4fb);
+      border: 1px solid #e2ebf5;
+    }
+    .royal-preview__player strong {
+      display: block;
+      color: #24364c;
+      font-size: .68rem;
+    }
+    .royal-preview__player small {
+      display: block;
+      color: #8794a4;
+      font-size: .52rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .royal-preview__stats {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .royal-preview__stats span,
+    .royal-preview__controls span {
+      padding: 4px 6px;
+      border-radius: 6px;
+      background: #fff;
+      border: 1px solid #e3eaf2;
+      color: #667589;
+      font-size: .48rem;
+      font-weight: 700;
+    }
+    .royal-preview__cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 7px;
+    }
+    .royal-mini-card {
+      min-width: 0;
+      padding: 7px;
+      border: 1px solid #dfe7f0;
+      border-radius: 9px;
+      background: #fff;
+    }
+    .royal-mini-card__art {
+      height: 38px;
+      margin-bottom: 6px;
+      border-radius: 6px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.34), transparent),
+        linear-gradient(145deg, #628fd0, #284f87);
+    }
+    .royal-mini-card:nth-child(2) .royal-mini-card__art { background: linear-gradient(145deg, #a57bc3, #5d4381); }
+    .royal-mini-card:nth-child(3) .royal-mini-card__art { background: linear-gradient(145deg, #d99b64, #96552f); }
+    .royal-mini-card:nth-child(4) .royal-mini-card__art { background: linear-gradient(145deg, #72a987, #386a4b); }
+    .royal-mini-card strong {
+      display: block;
+      overflow: hidden;
+      color: #34465a;
+      font-size: .5rem;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .royal-mini-card small {
+      color: #8b97a6;
+      font-size: .45rem;
+    }
+    .royal-mini-card__bar {
+      height: 4px;
+      margin-top: 5px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #e9eef4;
+    }
+    .royal-mini-card__bar i {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: #4f9f6e;
+    }
+    .royal-preview__resources {
+      padding: 10px;
+      border-radius: 10px;
+      background: #102f58;
+      color: #e5eef8;
+    }
+    .royal-preview__resources > strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: .56rem;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+    .royal-preview__resource {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 5px 0;
+      border-top: 1px solid rgba(255,255,255,.09);
+      font-size: .5rem;
+    }
+    .royal-preview__resource b { color: #fff; }
+    .royal-preview__controls {
+      display: flex;
+      gap: 6px;
+      padding: 0 18px 14px;
+    }
+    @media (max-width: 620px) {
+      .project-visual--royal {
+        height: auto;
+        padding: 28px 14px 18px;
+        align-items: stretch;
+      }
+      .project-card--featured .project-number--featured {
+        top: 12px;
+        right: 16px;
+        font-size: 2.2rem;
+      }
+      .royal-preview {
+        min-height: 0;
+        border-radius: 15px;
+        transform: none;
+      }
+      .royal-preview__top {
+        padding: 12px;
+        gap: 8px;
+      }
+      .royal-preview__tech { display: none; }
+      .royal-preview__search { padding: 9px 12px; }
+      .royal-preview__body {
+        grid-template-columns: 1fr;
+        padding: 0 12px 10px;
+      }
+      .royal-preview__player {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .royal-preview__stats { justify-content: flex-start; }
+      .royal-preview__cards { gap: 5px; }
+      .royal-mini-card { padding: 5px; }
+      .royal-mini-card__art { height: 32px; }
+      .royal-preview__resources {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+        padding: 8px;
+      }
+      .royal-preview__resources > strong {
+        grid-column: 1 / -1;
+        margin: 0;
+      }
+      .royal-preview__resource {
+        display: block;
+        padding: 4px;
+        border: 1px solid rgba(255,255,255,.1);
+        border-radius: 6px;
+      }
+      .royal-preview__resource b { display: block; margin-top: 2px; }
+      .royal-preview__controls {
+        padding: 0 12px 12px;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="page-glow page-glow--one" aria-hidden="true"></div>
@@ -214,20 +472,55 @@
 
         <div class="projects-grid">
           <article class="project-card project-card--featured reveal">
-            <div class="project-visual">
-              <div class="mock-window">
-                <div class="mock-toolbar"><i></i><i></i><i></i></div>
-                <div class="mock-dashboard">
-                  <div class="mock-bar"></div><div class="mock-bar"></div><div class="mock-bar"></div>
-                  <div class="mock-chart"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="project-number project-number--featured">01</div>
+            <div class="project-visual project-visual--royal">
+              <div class="royal-preview" aria-label="Représentation de l'interface Royal Track">
+                <div class="royal-preview__top">
+                  <div>
+                    <span class="royal-preview__brand">ROYAL TRACK</span>
+                    <small>Track your progression!</small>
+                  </div>
+                  <span class="royal-preview__tech">React · REST API</span>
+                </div>
+                <div class="royal-preview__search">
+                  <div class="royal-preview__input">Player tag</div>
+                  <div class="royal-preview__button">Rechercher</div>
+                </div>
+                <div class="royal-preview__body">
+                  <div>
+                    <div class="royal-preview__player">
+                      <div>
+                        <small>Player profile</small>
+                        <strong>Progression overview</strong>
+                      </div>
+                      <div class="royal-preview__stats">
+                        <span>Trophies</span><span>Level</span><span>Clan</span>
+                      </div>
+                    </div>
+                    <div class="royal-preview__cards">
+                      <div class="royal-mini-card"><div class="royal-mini-card__art"></div><strong>Card</strong><small>Lvl. 14</small><div class="royal-mini-card__bar"><i style="width:88%"></i></div></div>
+                      <div class="royal-mini-card"><div class="royal-mini-card__art"></div><strong>Card</strong><small>Lvl. 13</small><div class="royal-mini-card__bar"><i style="width:64%"></i></div></div>
+                      <div class="royal-mini-card"><div class="royal-mini-card__art"></div><strong>Card</strong><small>Lvl. 12</small><div class="royal-mini-card__bar"><i style="width:46%"></i></div></div>
+                      <div class="royal-mini-card"><div class="royal-mini-card__art"></div><strong>Card</strong><small>Lvl. 14</small><div class="royal-mini-card__bar"><i style="width:96%"></i></div></div>
+                    </div>
+                  </div>
+                  <div class="royal-preview__resources">
+                    <strong>Resources needed</strong>
+                    <div class="royal-preview__resource"><span>Gold</span><b>—</b></div>
+                    <div class="royal-preview__resource"><span>Elite</span><b>—</b></div>
+                    <div class="royal-preview__resource"><span>Evolutions</span><b>—</b></div>
+                  </div>
+                </div>
+                <div class="royal-preview__controls">
+                  <span>Filters</span><span>Meta Decks</span><span>Progression</span>
                 </div>
               </div>
             </div>
             <div class="project-body">
               <p class="mini-label">WEB APP · DATA</p>
               <h3>Data Analysis App — Clash Royale API</h3>
-              <p>Application React exploitant l'API officielle du jeu pour analyser des statistiques, déployée sur un serveur Ubuntu / DigitalOcean.</p>
-              <div class="tags"><span>React</span><span>REST API</span><span>DigitalOcean</span><span>Ubuntu</span></div>
+              <p>Application React connectée à l'API Clash Royale permettant de rechercher un joueur par tag, suivre la progression de ses cartes, estimer les ressources nécessaires aux améliorations et explorer les meta decks. Le backend Express interroge l'API du jeu et l'application a été déployée sur Ubuntu / DigitalOcean.</p>
+              <div class="tags"><span>React</span><span>Node.js</span><span>Express</span><span>REST API</span><span>DigitalOcean</span><span>Ubuntu</span></div>
             </div>
           </article>
 
@@ -300,7 +593,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <span>© <span id="year"></span> Gregory Dourlent</span>
-      <a href="#top">Retour en haut ↑</a>
+      <a href="#top" data-scroll-top>Retour en haut ↑</a>
     </div>
   </footer>
 
