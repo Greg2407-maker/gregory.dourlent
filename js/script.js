@@ -99,4 +99,14 @@ if (portrait) {
 applyHeroResponsiveFix();
 window.addEventListener('resize', applyHeroResponsiveFix);
 
+const scrollTopLink = document.querySelector('[data-scroll-top]');
+scrollTopLink?.addEventListener('click', (event) => {
+  event.preventDefault();
+  window.scrollTo({
+    top: 0,
+    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+  });
+  history.replaceState(null, '', window.location.pathname + window.location.search);
+});
+
 document.getElementById('year').textContent = new Date().getFullYear();
